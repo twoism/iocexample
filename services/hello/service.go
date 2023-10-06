@@ -7,16 +7,19 @@ import (
 	"github.com/twoism/iocexample/services/hello/container"
 )
 
+// Service is the hello service.
 type Service struct {
 	ctn container.Container
 }
 
+// NewService returns a new hello service given a container with all its dependencies.
 func NewService(ctn container.Container) *Service {
 	return &Service{ctn: ctn}
 }
 
+// SayHello implements the HelloService/SayHello method.
 func (s *Service) SayHello(ctx context.Context, req *connect.Request[v1.SayHelloRequest]) (*connect.Response[v1.SayHelloResponse], error) {
-	s.ctn.Logger().Print("saying hello!")
+	s.ctn.Logger().Print("saying hello!") // Use the injected logger.
 
 	return nil, connect.NewError(connect.CodeUnimplemented, nil)
 }
