@@ -2,6 +2,7 @@ package container
 
 import (
 	"github.com/rodaine/ioc"
+	"github.com/twoism/iocexample/services/hello/internal"
 	"log"
 )
 
@@ -13,6 +14,7 @@ type Option func(container *ioc.Container)
 type Container interface {
 	Name() string
 	Logger() *log.Logger
+	DB() *internal.DB
 }
 
 type container struct {
@@ -23,7 +25,10 @@ type container struct {
 
 // NewDefault returns a new container with all its default dependencies.
 func NewDefault() Container {
-	return New("example", WithLogger(InitFancyLogger()))
+	return New("example",
+		WithLogger(InitFancyLogger()),
+		WithDB(WithDefaultDB()),
+	)
 }
 
 // New returns an empty container.
@@ -48,4 +53,9 @@ func (c *container) Name() string {
 // Logger returns the injected logger.
 func (c *container) Logger() *log.Logger {
 	return ioc.Resolve[*log.Logger](c.c)
+}
+
+// DB returns the injected DB.
+func (c *container) DB() *internal.DB {
+	return ioc.Resolve[*internal.DB](c.c)
 }
