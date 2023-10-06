@@ -9,17 +9,17 @@ import (
 
 // Service is the hello service.
 type Service struct {
-	ctn container.Container
+	container.Container
 }
 
 // NewService returns a new hello service given a container with all its dependencies.
 func NewService(ctn container.Container) *Service {
-	return &Service{ctn: ctn}
+	return &Service{Container: ctn}
 }
 
 // SayHello implements the HelloService/SayHello method.
 func (s *Service) SayHello(ctx context.Context, req *connect.Request[v1.SayHelloRequest]) (*connect.Response[v1.SayHelloResponse], error) {
-	s.ctn.Logger().Print("saying hello!") // Use the injected logger.
+	s.Logger().Print("saying hello!") // Use the injected logger.
 
 	return nil, connect.NewError(connect.CodeUnimplemented, nil)
 }

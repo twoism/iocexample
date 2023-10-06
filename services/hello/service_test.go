@@ -6,12 +6,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	hellov1 "github.com/twoism/iocexample/gen/hello/v1"
 	"github.com/twoism/iocexample/services/hello/container"
-	"log"
 	"testing"
 )
 
 func TestSayHello(t *testing.T) {
-	ctn := container.New("test", container.WithLogger(log.Default()))
+	ctn := container.New("test", container.WithFancyLogger())
 	svc := NewService(ctn)
 
 	resp, err := svc.SayHello(context.Background(),

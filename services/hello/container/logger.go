@@ -12,6 +12,8 @@ func WithLogger(l *log.Logger) Option {
 	}
 }
 
-func InitFancyLogger() *log.Logger {
-	return log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+func WithFancyLogger() Option {
+	return WithLogger(
+		log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile),
+	)
 }

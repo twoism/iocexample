@@ -26,7 +26,7 @@ type container struct {
 // NewDefault returns a new container with all its default dependencies.
 func NewDefault() Container {
 	return New("example",
-		WithLogger(InitFancyLogger()),
+		WithFancyLogger(),
 		WithDB(WithDefaultDB()),
 	)
 }
