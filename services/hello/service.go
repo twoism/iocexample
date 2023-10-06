@@ -2,7 +2,7 @@ package hello
 
 import (
 	"context"
-	connect "github.com/bufbuild/connect-go"
+	"github.com/bufbuild/connect-go"
 	v1 "github.com/twoism/iocexample/gen/hello/v1"
 	"github.com/twoism/iocexample/services/hello/container"
 )
