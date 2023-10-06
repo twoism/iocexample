@@ -19,7 +19,7 @@ type container struct {
 }
 
 func NewDefault() Container {
-	return New("example", WithLogger(log.Default()))
+	return New("example", WithLogger(InitFancyLogger()))
 }
 
 func New(name string, opts ...Option) Container {
