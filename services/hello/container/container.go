@@ -18,7 +18,7 @@ type Container interface {
 }
 
 type container struct {
-	c *ioc.Container
+	*ioc.Container
 
 	name string
 }
@@ -38,10 +38,12 @@ func New(name string, opts ...Option) Container {
 	for _, opt := range opts {
 		opt(ctn)
 	}
+
 	ctn.Freeze()
+
 	return &container{
-		name: name,
-		c:    ctn,
+		name:      name,
+		Container: ctn,
 	}
 }
 
@@ -52,10 +54,10 @@ func (c *container) Name() string {
 
 // Logger returns the injected logger.
 func (c *container) Logger() *log.Logger {
-	return ioc.Resolve[*log.Logger](c.c)
+	return ioc.Resolve[*log.Logger](c.Container)
 }
 
 // DB returns the injected DB.
 func (c *container) DB() *internal.DB {
-	return ioc.Resolve[*internal.DB](c.c)
+	return ioc.Resolve[*internal.DB](c.Container)
 }
