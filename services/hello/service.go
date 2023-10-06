@@ -1,16 +1,17 @@
-package main
+package hello
 
 import (
 	"context"
 	connect "github.com/bufbuild/connect-go"
 	v1 "github.com/twoism/iocexample/gen/hello/v1"
+	"github.com/twoism/iocexample/services/hello/container"
 )
 
 type Service struct {
-	ctn Container
+	ctn container.Container
 }
 
-func NewService(ctn Container) *Service {
+func NewService(ctn container.Container) *Service {
 	return &Service{ctn: ctn}
 }
 

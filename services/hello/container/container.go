@@ -1,11 +1,11 @@
-package main
+package container
 
 import (
 	"github.com/rodaine/ioc"
 	"log"
 )
 
-type ContainerOption func(container *ioc.Container)
+type Option func(container *ioc.Container)
 
 type Container interface {
 	Name() string
@@ -18,11 +18,11 @@ type container struct {
 	name string
 }
 
-func NewDefaultContainer() Container {
-	return NewContainer("example", WithLogger(log.Default()))
+func NewDefault() Container {
+	return New("example", WithLogger(log.Default()))
 }
 
-func NewContainer(name string, opts ...ContainerOption) Container {
+func New(name string, opts ...Option) Container {
 	ctn := new(ioc.Container)
 
 	for _, opt := range opts {
@@ -41,10 +41,4 @@ func (c *container) Name() string {
 
 func (c *container) Logger() *log.Logger {
 	return ioc.Resolve[*log.Logger](c.c)
-}
-
-func WithLogger(l *log.Logger) ContainerOption {
-	return func(ctn *ioc.Container) {
-		ioc.Bind(ctn, ioc.Static[*log.Logger](l))
-	}
 }
